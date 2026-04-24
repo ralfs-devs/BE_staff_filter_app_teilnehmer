@@ -9,3 +9,6 @@ def employee_overview(request):
     # Hier die entsprechenden Filter anlegen und die context-Variable definieren, um die Daten an das Template zu übergeben
 
     return render(request, 'employee_list.html')
+
+class EmployeeListView(ListView):
+    pass
