@@ -72,7 +72,7 @@
           <tr>
             <td>{{ employee.name }}</td>
             <td>{{ employee.department }}</td>
-            <td>{{ employee.hire_date }}</td>
+            <td style="text-align: center">{{ employee.hire_date|date:"d.m.Y" }}</td>
           </tr>
         {% endfor %}
     </table>
