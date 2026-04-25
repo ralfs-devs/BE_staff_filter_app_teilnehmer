@@ -23,15 +23,40 @@
     <h2 style="color:red">Antworten:</h2>
 
     <!-- Hier eure Antworten rendern -->
-    <h3>1. Alle Mitarbeiter, ihre Abteilung und ihr Gehalt:</h3>
-      
-    {% for employee in employees %}
-    <div>
-        <p><strong><u>{{ employee.name }}:</u></strong><br>
-        <strong>Abteilung:</strong> {{ employee.department }}<br>
-        <strong>Gehalt:</strong> {{ employee.salary }}€</p>
-    </div>
-    {% endfor %}
+    <h4 style="color:blue">1. Alle Mitarbeiter, ihre Abteilung und ihr Gehalt:</h4>
+    <table border="0" cellpadding="5" cellspacing="5">
+        <tr>
+            <th style="text-align:left">Name</th>
+            <th style="text-align:left">Abteilung</th>
+            <th style="text-align:left">Gehalt</th>
+        </tr>
+        {% for employee in employees %}
+          <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.salary }}€</td>
+          </tr>
+        {% endfor %}
+    </table>
+
+    <h4 style="color:blue">2. Mitarbeiter, die mehr als 3000 € im Monat verdienen:</h4>
+    <table border="0" cellpadding="5" cellspacing="5">
+        <tr>
+            <th style="text-align:left">Name</th>
+            <th style="text-align:left">Abteilung</th>
+            <th style="text-align:left">Gehalt</th>
+        </tr>
+        {% for employee in gt3000_employees %}
+          <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.salary }}€</td>
+          </tr>
+        {% endfor %}
+    </table>
+    <h4 style="color:blue">3. Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr verdienen:</h4>
+    <p>Die Anzahl der Besserverdienenden ist --{{ high_earners_count }}--.</p>
 
   </body>
+
 </html>
