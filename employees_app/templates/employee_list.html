@@ -57,6 +57,24 @@
     <h4 style="color:blue">3. Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr verdienen:</h4>
     <p>Die Anzahl der Besserverdienenden ist --{{ high_earners_count }}--.</p>
 
-  </body>
+    <h4 style="color:blue">4. Durchschnittsgehalt aller Mitarbeiter im Sales-Team:</h4>
+    <p>Das Durchschnittsgehalt im Sales-Team beträgt {{ sales_avg_salary.salary__avg|floatformat:2 }}€.</p>
 
+    <h4 style="color:blue">5. Mitarbeiter, die vor dem 1. Januar 2022 eingestellt wurden und NICHT zur Abteilung HR gehören:</h4>
+    <table border="0" cellpadding="5" cellspacing="5">
+        <tr>
+            <th style="text-align:left">Name</th>
+            <th style="text-align:left">Abteilung</th>
+            <th style="text-align:left">Einstellungsdatum</th>
+        </tr>
+
+        {% for employee in hr_former_hires %}
+          <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.hire_date }}</td>
+          </tr>
+        {% endfor %}
+    </table>
+  </body>
 </html>

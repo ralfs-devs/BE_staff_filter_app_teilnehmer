@@ -1,9 +1,11 @@
-from django.shortcuts import render
+#from django.shortcuts import render
 from .models import Employee
 from django.db.models import Avg, Q
-from datetime import date
 from django.views.generic.list import ListView
-from employees_app.models import Employee, Department
+from employees_app.models import Employee
+from datetime import date
+
+
 
 
 class EmployeeListView(ListView):
@@ -19,6 +21,9 @@ class EmployeeListView(ListView):
         context = super().get_context_data(**kwargs)
         context['gt3000_employees'] = Employee.objects.filter(salary__gt=3000)
         context['high_earners_count'] = Employee.objects.filter(salary__gte=5000).count()
+        context['sales_avg_salary'] = Employee.objects.filter(department__name='Sales').aggregate(Avg('salary'))
+        context['hr_former_hires'] = Employee.objects.exclude (Q(hire_date__gt=date(2022, 1, 1))| Q(department__name='HR'))
+        
         
         return context
     
