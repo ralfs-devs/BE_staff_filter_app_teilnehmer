@@ -23,5 +23,15 @@
     <h2 style="color:red">Antworten:</h2>
 
     <!-- Hier eure Antworten rendern -->
+    <h3>1. Alle Mitarbeiter, ihre Abteilung und ihr Gehalt:</h3>
+      
+    {% for employee in employees %}
+    <div>
+        <p><strong><u>{{ employee.name }}:</u></strong><br>
+        <strong>Abteilung:</strong> {{ employee.department }}<br>
+        <strong>Gehalt:</strong> {{ employee.salary }}€</p>
+    </div>
+    {% endfor %}
+
   </body>
 </html>

@@ -2,13 +2,14 @@ from django.shortcuts import render
 from .models import Employee
 from django.db.models import Avg, Q
 from datetime import date
+from django.views.generic.list import ListView
+from employees_app.models import Employee
 
-
-def employee_overview(request):
-
-    # Hier die entsprechenden Filter anlegen und die context-Variable definieren, um die Daten an das Template zu übergeben
-
-    return render(request, 'employee_list.html')
 
 class EmployeeListView(ListView):
-    pass
+    model = Employee
+    template_name = 'employee_list.html'
+    context_object_name = 'employees'
+
+    def get_queryset(self):
+        return Employee.objects.select_related('department').all()
