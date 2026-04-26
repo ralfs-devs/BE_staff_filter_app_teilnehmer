@@ -14,15 +14,16 @@ class EmployeeListView(ListView):
     context_object_name = 'employees'
 
     def get_queryset(self):
+        queryset = Employee.objects.select_related('department').all()
         
-        return Employee.objects.select_related('department').all()
+        return queryset.order_by('department__name', 'salary')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['gt3000_employees'] = Employee.objects.filter(salary__gt=3000)
+        context['gt3000_employees'] = (Employee.objects.filter(salary__gt=3000)).order_by('salary')
         context['high_earners_count'] = Employee.objects.filter(salary__gte=5000).count()
         context['sales_avg_salary'] = Employee.objects.filter(department__name='Sales').aggregate(Avg('salary'))
-        context['hr_former_hires'] = Employee.objects.exclude (Q(hire_date__gt=date(2022, 1, 1))| Q(department__name='HR')).order_by('hire_date')
+        context['hr_former_hires'] = (Employee.objects.exclude (Q(hire_date__gt=date(2022, 1, 1))| Q(department__name='HR'))).order_by('hire_date')
                 
         return context
     
